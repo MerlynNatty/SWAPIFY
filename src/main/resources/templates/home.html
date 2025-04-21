@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Home | Book Exchange</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<h2>Welcome to SWAPIFY</h2>
+
+<div class="dark-mode-toggle">
+    <label class="switch">
+        <input type="checkbox" id="darkModeToggle">
+        <span class="slider round"></span>
+    </label>
+</div>
+
+<!-- Book Grid -->
+<div class="book-grid">
+    <div th:each="book : ${books}" class="book-card">
+        <img th:src="@{${book.imageUrl}}" alt="Book Cover" />
+        <h3 th:text="${book.title}">Title</h3>
+        <p th:text="'by ' + ${book.author}">Author</p>
+        <div class="actions">
+            <a th:href="@{'/order?bookId=' + ${book.id} + '&action=Buy'}"><button>Buy</button></a>
+            <a th:href="@{'/order?bookId=' + ${book.id} + '&action=Rent'}"><button>Rent</button></a>
+            <a th:href="@{'/order?bookId=' + ${book.id} + '&action=Borrow'}"><button>Borrow</button></a>
+        </div>
+    </div>
+</div>
+
+<br>
+<h2>Add Your Book</h2>
+<form id="addBookForm" enctype="multipart/form-data" method="post" th:action="@{/add-book}">
+    <input type="text" name="title" placeholder="Book Title" required />
+    <input type="text" name="author" placeholder="Author" required />
+    <input type="file" name="imageFile" accept="image/*" required />
+    <br><br>
+    <button type="submit">Add Book</button>
+</form>
+
+<!-- Dark Mode Script -->
+<script>
+    const toggle = document.getElementById('darkModeToggle');
+    const body = document.body;
+
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+        body.classList.add('dark-mode');
+        toggle.checked = true;
+    }
+
+    toggle.addEventListener('change', () => {
+        if (toggle.checked) {
+            body.classList.add('dark-mode');
+            localStorage.setItem('dark-mode', 'enabled');
+        } else {
+            body.classList.remove('dark-mode');
+            localStorage.setItem('dark-mode', 'disabled');
+        }
+    });
+</script>
+
+</body>
+</html>

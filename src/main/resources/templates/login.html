@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login | Book Exchange</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+<body><center><br><br><br><br><br>
+    <h2>Login to SWAPIFY</h2>
+    <div class="dark-mode-toggle">
+        <label class="switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider round"></span>
+        </label>
+    </div>
+    
+    <form th:action="@{/login}" method="post">
+        <input type="email" name="email" placeholder="Email" required />
+        <input type="password" name="password" id="loginPassword" placeholder="Password" required />
+        <div class="toggle-container">
+            <input type="checkbox" onclick="togglePassword('loginPassword')"> Show Password
+        </div><br><br>
+        <button type="submit">Login</button>
+    </form>
+
+    <div th:if="${error}" class="error-message">
+        <p th:text="${error}"></p>
+    </div>
+
+    <p>Don't have an account? <a th:href="@{/signup}">Signup</a></p>
+    <script>
+        function togglePassword(id) {
+            const passwordInput = document.getElementById(id);
+            passwordInput.type = passwordInput.type === "password" ? "text" : "password";
+        }
+       
+    </script>
+    <script>
+        const toggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+    
+        // Load mode from localStorage
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            body.classList.add('dark-mode');
+            toggle.checked = true;
+        }
+    
+        toggle.addEventListener('change', () => {
+            if (toggle.checked) {
+                body.classList.add('dark-mode');
+                localStorage.setItem('dark-mode', 'enabled');
+            } else {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('dark-mode', 'disabled');
+            }
+        });
+    </script>
+    </center>
+</body>
+</html>

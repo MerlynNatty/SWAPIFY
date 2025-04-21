@@ -1,0 +1,227 @@
+/* Reset & Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f4f4f7;
+    min-height: 100vh;
+    padding: 30px;
+    color: #1c1c1c;
+    transition: background 0.4s, color 0.4s;
+}
+
+.dark-mode {
+    background-color: #121212;
+    color: #eaeaea;
+}
+
+h2, h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--heading-color, #333);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+
+/* Fix for headings in dark mode */
+.dark-mode h2,
+.dark-mode h3 {
+    color: #f9f9f9; /* Bright color for visibility */
+    text-shadow: 1px 1px 4px #000; /* Slightly stronger shadow for contrast */
+}
+
+
+/* Dark Mode Toggle Switch */
+.dark-mode-toggle {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+}
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+.switch input { display: none; }
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0;
+    right: 0; bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+}
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px; width: 26px;
+    left: 4px; bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+input:checked + .slider {
+    background-color: #66bb6a;
+}
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Book Cards */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 20px;
+}
+
+.book-card {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.dark-mode .book-card {
+    background: rgba(30, 30, 30, 0.4);
+}
+
+.book-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.book-card img {
+    max-width: 100%;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.actions button {
+    background: linear-gradient(45deg, #4a90e2, #0072ff);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin: 5px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s ease-in-out;
+}
+.actions button:hover {
+    transform: scale(1.1);
+    background: linear-gradient(45deg, #f7971e, #ffd200);
+}
+
+/* Forms */
+form {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 25px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+.dark-mode form {
+    background: rgba(30, 30, 30, 0.4);
+}
+
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    background: rgba(255, 255, 255, 0.8);
+}
+.dark-mode form input {
+    background: rgba(255, 255, 255, 0.1);
+    color: #eaeaea;
+}
+
+form button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: linear-gradient(90deg, #4a90e2, #0072ff);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+form button:hover {
+    background: linear-gradient(90deg, #00f2fe, #4facfe);
+    transform: scale(1.05);
+}
+
+/* QR & Payment Pages */
+.payment-container,
+.success-container {
+    text-align: center;
+    padding: 50px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    margin: auto;
+}
+.dark-mode .payment-container,
+.dark-mode .success-container {
+    background: rgba(30, 30, 30, 0.4);
+}
+
+.qr-image {
+    max-width: 250px;
+    margin-top: 20px;
+    border-radius: 12px;
+    border: 5px solid #fff;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.success-message {
+    font-size: 20px;
+    margin-top: 15px;
+    color: #4a90e2;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Toggle Container (Show Password) */
+.toggle-container {
+    color: inherit;
+    margin-bottom: 10px;
+}
+
+/* Error Message */
+.error-message p {
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Links */
+a {
+    color: #4a90e2;
+    font-weight: bold;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}

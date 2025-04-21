@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Order Page</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+</head>
+<body><center>
+    <h2>Order Confirmation</h2>
+    <div class="dark-mode-toggle">
+        <label class="switch">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider round"></span>
+        </label>
+    </div>
+    <div>
+        <img th:src="@{${book.imageUrl}}" alt="Book Image" style="max-height: 200px;" />
+    </div><br>
+
+    <p th:text="'You chose to ' + ${action} + ' the book: ' + ${book.title} + ' by ' + ${book.author}"></p><br>
+
+    <h3>Proceed to Payment</h3>
+    <form th:action="@{/payment}" method="post">
+        <input type="hidden" name="bookId" th:value="${book.id}" />
+        <input type="hidden" name="action" th:value="${action}" />
+        <button type="submit">Pay Now</button>
+    </form>
+
+    <br>
+    <a href="/home" class="button">Back to Home</a>
+    <script>
+        const toggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+    
+        // Load mode from localStorage
+        if (localStorage.getItem('dark-mode') === 'enabled') {
+            body.classList.add('dark-mode');
+            toggle.checked = true;
+        }
+    
+        toggle.addEventListener('change', () => {
+            if (toggle.checked) {
+                body.classList.add('dark-mode');
+                localStorage.setItem('dark-mode', 'enabled');
+            } else {
+                body.classList.remove('dark-mode');
+                localStorage.setItem('dark-mode', 'disabled');
+            }
+        });
+    </script>
+</center>
+</body>
+</html>
